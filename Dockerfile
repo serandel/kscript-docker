@@ -24,5 +24,5 @@ RUN source /root/.sdkman/bin/sdkman-init.sh && \
 # For caching JARs
 VOLUME "/root/.kscript"
 
-ENTRYPOINT source /root/.sdkman/bin/sdkman-init.sh && /usr/bin/env kscript
+ENTRYPOINT source /root/.sdkman/bin/sdkman-init.sh && /usr/bin/env kscript $0 $@
 CMD        [ "--help" ]
