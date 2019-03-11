@@ -21,5 +21,8 @@ RUN source /root/.sdkman/bin/sdkman-init.sh && \
     sdk install kotlin 1.3.21 && \
     sdk install kscript 2.7.1
 
+# For caching JARs
+VOLUME "/root/.kscript"
+
 ENTRYPOINT source /root/.sdkman/bin/sdkman-init.sh && /usr/bin/env kscript
 CMD        [ "--help" ]
