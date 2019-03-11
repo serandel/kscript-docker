@@ -6,4 +6,18 @@ Docker image to run [kscript](https://github.com/holgerbrandl/kscript) (Kotlin s
 
 The image is labelled with the same version number as kscript, with the underlying dependencies as updated as possible.
 
-The base image is Alpine, with Java, Maven, Kotlin and kscript installed with [SDKMAN!](https://sdkman.io/).
+The base image is Ubuntu, with Java, Maven, Kotlin and kscript installed with [SDKMAN!](https://sdkman.io/).
+
+## Usage with inline code
+
+`docker run -i serandel/kscript 'println("Hello, world!")'`
+
+## Usage with a script from outside the container
+
+`docker run -i serandel/kscript - < script.kts`
+
+This will make kscript read the code from `stdin` while piping the file. Beware that the `-i` flag is needed to have `stdout` redirected outside the container.
+
+## Volume
+
+A volume is created for `/root/.kscript` so the JARs are cached between different invocations to containers.
