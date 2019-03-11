@@ -20,4 +20,6 @@ This will make kscript read the code from `stdin` while piping the file. Beware 
 
 ## Volume
 
-A volume is created for `/root/.kscript` so the JARs are cached between different invocations to containers.
+It's highly advisable to create a volume for `/root/.kscript` so the JARs are cached between different invocations to containers.
+
+`docker run -i -v kscript:/root/.kscript serandel/kscript 'println("Hello, world!")'`
