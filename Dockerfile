@@ -1,21 +1,25 @@
-FROM alpine:3.9
+# Alpine had problems with Java and SDKMAN!
+# lchmod (file attributes) error: Not supported
+# https://bugs.alpinelinux.org/issues/8089
+
+FROM ubuntu:cosmic
 
 MAINTAINER serandel@gmail.com
 
-# Install bash, curl and other stuff I've copied from other Dockerfiles and I reckon are necessary for SDKMAN! :)
-RUN apk upgrade --update && \
-    apk add --no-cache --update libstdc++ curl ca-certificates bash zip unzip openssl && \
-    update-ca-certificates && \
-    rm -rf /var/lib/apt/lists/* && \
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update && \
+	apt-get -y install curl zip unzip && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install SDKMAN!
 RUN curl -s "https://get.sdkman.io" | bash
 
 RUN source /root/.sdkman/bin/sdkman-init.sh && \
-    sdk install java && \
-    sdk install maven && \
-    sdk install kotlin && \
-    sdk install kscript
+    sdk install java 8.0.202-zulu && \
+    sdk install maven 3.6.0 && \
+    sdk install kotlin 1.3.21 && \
+    sdk install kscript 2.7.1
 
-ENTRYPOINT [ "/usr/bin/env", "kscript" ]
+ENTRYPOINT source /root/.sdkman/bin/sdkman-init.sh && /usr/bin/env kscript
 CMD        [ "--help" ]
