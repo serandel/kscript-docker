@@ -2,7 +2,7 @@
 # lchmod (file attributes) error: Not supported
 # https://bugs.alpinelinux.org/issues/8089
 
-FROM ubuntu:cosmic
+FROM ubuntu:eoan
 
 MAINTAINER serandel@gmail.com
 
@@ -16,10 +16,10 @@ RUN apt-get update && \
 RUN curl -s "https://get.sdkman.io" | bash
 
 RUN source /root/.sdkman/bin/sdkman-init.sh && \
-    sdk install java 8.0.202-zulu && \
+    sdk install java 8.0.232.fx-zulu && \
     sdk install maven 3.6.0 && \
-    sdk install kotlin 1.3.21 && \
-    sdk install kscript 2.7.1
+    sdk install kotlin 1.4.10 && \
+    sdk install kscript 2.9.3
 
 ENTRYPOINT source /root/.sdkman/bin/sdkman-init.sh && /usr/bin/env kscript "$0" "$@"
 CMD        [ "--help" ]

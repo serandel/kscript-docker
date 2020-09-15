@@ -16,7 +16,7 @@ The base image is Ubuntu, with Java, Maven, Kotlin and kscript installed with [S
 
 `docker run -i serandel/kscript - < script.kts`
 
-This will make kscript read the code from `stdin` while piping the file. Beware that the `-i` flag is needed to have `stdout` redirected outside the container.
+This will make kscript read the code from `stdin` while piping the file. Be aware that the `-i` flag is needed to have `stdout` redirected outside the container.
 
 ## Volume
 
