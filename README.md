@@ -16,10 +16,12 @@ The base image is Ubuntu, with Java, Maven, Kotlin and kscript installed with [S
 
 `docker run -i serandel/kscript - < script.kts`
 
-This will make kscript read the code from `stdin` while piping the file. Be aware that the `-i` flag is needed to have `stdout` redirected outside the container.
+This will make kscript read the code from `stdin` while piping the file. Be aware that the `-i` flag is needed to have `stdout` redirected outside the container. `--rm` is just to stop polluting Docker with stopped containers.
 
 ## Volume
 
 It's highly advisable to create a volume for `/root/.kscript` so the JARs are cached between different invocations to containers.
 
-`docker run -i -v kscript:/root/.kscript serandel/kscript 'println("Hello, world!")'`
+`docker run -i --rm -v kscript:/root/.kscript serandel/kscript 'println("Hello, world!")'`
+
+There is a `kscript.sh` Bash shell script that invokes the container with these arguments for your convenience.
